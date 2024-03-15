@@ -1,6 +1,6 @@
 <template>
   <div>
-    Hello world!
+    <Button>Click me</Button>
   </div>
 </template>
 
