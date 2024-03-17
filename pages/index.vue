@@ -23,7 +23,7 @@
       </section>
 
       <Button as-child>
-        <NuxtLink href="/workout/new" class="mt-10">
+        <NuxtLink href="/workouts/new" class="mt-10">
           Novo Treino
         </NuxtLink>
       </Button>

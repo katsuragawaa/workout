@@ -18,7 +18,7 @@ const props = defineProps<{
       </div>
 
       <Button as-child variant="outline" size="icon" class="min-w-10">
-        <NuxtLink :href="`/workout/${props.id}`">
+        <NuxtLink :href="`/workouts/${props.id}`">
           <ChevronRight class="h-4 w-4" />
         </NuxtLink>
       </Button>
