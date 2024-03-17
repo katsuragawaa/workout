@@ -21,7 +21,7 @@ const mockExercise = {
 
       <TimerDrawer>
         <Button size="icon">
-          <Timer className="h-4 w-4" />
+          <Timer class="h-4 w-4" />
         </Button>
       </TimerDrawer>
     </header>
@@ -30,13 +30,17 @@ const mockExercise = {
       <h1 class="text-5xl font-extrabold">NOME DO WORKOUT</h1>
 
       <div class="grid grid-cols-1 gap-3 pt-10 md:grid-cols-2">
-        <ExerciseCard :name="mockExercise.name" :muscleGroup="mockExercise.muscleGroup" :sets="mockExercise.sets"
-          :reps="mockExercise.reps" :weight="mockExercise.weight" />
+        <ExerciseCard
+          :name="mockExercise.name"
+          :muscleGroup="mockExercise.muscleGroup"
+          :sets="mockExercise.sets"
+          :reps="mockExercise.reps"
+          :weight="mockExercise.weight"
+        />
       </div>
 
-
       <TimerDrawer>
-        <Button className="mt-10">Descansar</Button>
+        <Button class="mt-10">Descansar</Button>
       </TimerDrawer>
 
       <Button variant="outline">

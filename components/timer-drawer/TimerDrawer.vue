@@ -50,13 +50,13 @@ onUnmounted(clearTimer);
       <slot />
     </DrawerTrigger>
     <DrawerContent>
-      <div className="mx-auto w-full max-w-sm">
+      <div class="mx-auto w-full max-w-sm">
         <DrawerHeader>
           <DrawerTitle>Descanso</DrawerTitle>
           <DrawerDescription>Pausa até a próxima atividade</DrawerDescription>
         </DrawerHeader>
 
-        <div className="p-4 text-center text-7xl font-bold tracking-tighter">{{ formattedTime }}</div>
+        <div class="p-4 text-center text-7xl font-bold tracking-tighter">{{ formattedTime }}</div>
 
         <DrawerFooter>
           <Button v-if="isRunning" @click="pauseTimer">Pausar</Button>
