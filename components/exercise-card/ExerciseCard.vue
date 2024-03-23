@@ -3,7 +3,7 @@ import { CheckSquare, Repeat2, Square, Weight, X } from "lucide-vue-next";
 
 const props = defineProps<{
   name: string;
-  muscleGroup: string;
+  muscle: string;
   sets: number;
   reps: number;
   weight: number;
@@ -20,23 +20,23 @@ const toggleDone = () => {
 <template>
   <Card :class="{ 'opacity-50': done }">
     <CardHeader>
-      <Badge variant="outline" class="w-fit"> Muscle group </Badge>
-      <CardTitle>Nome do exercício</CardTitle>
+      <Badge variant="outline" class="w-fit">{{ props.muscle }}</Badge>
+      <CardTitle>{{ props.name }}</CardTitle>
     </CardHeader>
 
     <CardContent class="flex items-center justify-between">
       <div class="flex items-center gap-1">
         <Repeat2 class="h-5 w-5" />
         <span>
-          4
+          {{ props.sets }}
           <X class="mb-0.5 inline-block h-4 w-4" />
-          10
+          {{ props.reps }}
         </span>
       </div>
 
       <div class="flex items-center gap-1">
         <Weight class="h-5 w-5" />
-        <span>20</span>
+        <span>{{ props.weight }}</span>
       </div>
 
       <Button variant="ghost" size="icon" @click="toggleDone" class="h-5 w-5">

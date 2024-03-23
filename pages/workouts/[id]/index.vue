@@ -3,7 +3,7 @@ import { ArrowLeftIcon, Timer } from "lucide-vue-next";
 
 const mockExercise = {
   name: "Bench press",
-  muscleGroup: "Chest",
+  muscle: "Chest",
   sets: 4,
   reps: 10,
   weight: 20,
@@ -32,7 +32,7 @@ const mockExercise = {
       <div class="grid grid-cols-1 gap-3 pt-10 md:grid-cols-2">
         <ExerciseCard
           :name="mockExercise.name"
-          :muscleGroup="mockExercise.muscleGroup"
+          :muscle="mockExercise.muscle"
           :sets="mockExercise.sets"
           :reps="mockExercise.reps"
           :weight="mockExercise.weight"
@@ -43,8 +43,8 @@ const mockExercise = {
         <Button class="mt-10">Descansar</Button>
       </TimerDrawer>
 
-      <Button variant="outline">
-        <NuxtLink :to="`/workouts/${1}`"> Editar treino </NuxtLink>
+      <Button variant="outline" class="mt-2">
+        <NuxtLink :to="`/workouts/${1}`">Editar treino</NuxtLink>
       </Button>
     </main>
   </div>
