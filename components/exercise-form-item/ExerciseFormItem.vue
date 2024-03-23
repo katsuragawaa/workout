@@ -47,7 +47,7 @@ const confirmDelete = () => {
       </div>
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger as-child>
           <Button variant="ghost" size="icon" class="min-w-10">
             <MoreVertical class="h-4 w-4" />
             <span class="sr-only">More</span>
