@@ -65,7 +65,7 @@ const confirmDelete = () => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <ExerciseFormDialog></ExerciseFormDialog>
+      <ExerciseFormDialog />
       <!-- <DeleteAlertDialog open={openAlert} setOpen={setOpenAlert} onConfirm={confirmDelete} /> -->
     </div>
   </div>
