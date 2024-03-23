@@ -5,9 +5,12 @@ module.exports = {
   },
   extends: [
     "@nuxt/eslint-config",
+    "plugin:vue/vue3-recommended",
     "prettier",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
   ],
-  rules: {},
+  rules: {
+    "vue/multi-word-component-names": "off",
+  },
 };
