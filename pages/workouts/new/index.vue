@@ -42,7 +42,10 @@ const mockExercise = {
 <template>
   <div>
     <header class="container flex max-w-4xl items-center justify-between pt-14">
-      <Button variant="outline" size="icon">
+      <Button
+        variant="outline"
+        size="icon"
+      >
         <NuxtLink to="/">
           <ArrowLeftIcon class="h-4 w-4" />
         </NuxtLink>
@@ -50,29 +53,47 @@ const mockExercise = {
     </header>
 
     <main class="container flex max-w-xl flex-col py-10">
-      <h1 class="text-4xl font-extrabold">Plano de treino</h1>
-      <p class="pb-6 text-sm text-muted-foreground">Planeje seu treco</p>
+      <h1 class="text-4xl font-extrabold">
+        Plano de treino
+      </h1>
+      <p class="pb-6 text-sm text-muted-foreground">
+        Planeje seu treco
+      </p>
 
-      <Accordion type="single" collapsible>
+      <Accordion
+        type="single"
+        collapsible
+      >
         <AccordionItem value="1">
           <div class="flex items-center gap-4">
             <div class="flex-1">
-              <AccordionTrigger class="w-full pb-4 text-start text-2xl font-bold">Workout 1</AccordionTrigger>
+              <AccordionTrigger class="w-full pb-4 text-start text-2xl font-bold">
+                Workout 1
+              </AccordionTrigger>
             </div>
 
             <DropdownMenu>
               <DropdownMenuTrigger as-child>
-                <Button variant="ghost" size="icon">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                >
                   <MoreVertical class="h-4 w-4" />
                   <span class="sr-only">More</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem @click="() => handleEdit(defaultWorkout)" class="flex items-center gap-2">
+                <DropdownMenuItem
+                  class="flex items-center gap-2"
+                  @click="() => handleEdit(defaultWorkout)"
+                >
                   <Pencil class="h-3 w-3" />
                   <span>Editar</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem @click="() => handleDelete(defaultWorkout)" class="flex items-center gap-2">
+                <DropdownMenuItem
+                  class="flex items-center gap-2"
+                  @click="() => handleDelete(defaultWorkout)"
+                >
                   <Trash2 class="h-3 w-3" />
                   <span>Deletar</span>
                 </DropdownMenuItem>
@@ -87,7 +108,13 @@ const mockExercise = {
               :reps="mockExercise.reps"
             />
 
-            <Button @click="handleNewExercise" variant="secondary" class="md:col-span-2">Novo exercício</Button>
+            <Button
+              variant="secondary"
+              class="md:col-span-2"
+              @click="handleNewExercise"
+            >
+              Novo exercício
+            </Button>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
