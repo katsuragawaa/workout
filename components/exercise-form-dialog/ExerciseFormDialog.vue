@@ -17,12 +17,12 @@ const formSchema = toTypedSchema(
   z.object({
     id: z.string().uuid().optional(),
     workoutId: z.string().uuid(),
-    name: z.string().min(2).max(50),
+    name: z.string().min(2, { message: "Name must be at least 2 characters long" }).max(50),
     muscle: z.string().refine((value) => muscles.some((muscle) => muscle.value === value), {
       message: "You must select a valid option",
     }),
-    sets: z.number().min(1).max(5),
-    reps: z.number().min(1).max(30),
+    sets: z.coerce.number().min(1).max(5),
+    reps: z.coerce.number().min(1).max(30),
   }),
 );
 
@@ -46,9 +46,8 @@ const submit = form.handleSubmit((values) => {
 
 const toggleDialog = () => {
   form.resetForm();
-  emit("update:open", false)
+  emit("update:open", false);
 };
-
 </script>
 
 <template>
@@ -85,17 +84,16 @@ const toggleDialog = () => {
                 v-bind="componentField"
               />
             </FormControl>
-            <FormDescription> This is your public display name. </FormDescription>
             <FormMessage />
           </FormItem>
         </FormField>
 
         <FormField
           v-slot="{ componentField }"
-          name="username"
+          name="muscle"
         >
           <FormItem>
-            <FormLabel>Username</FormLabel>
+            <FormLabel>Músculo</FormLabel>
             <FormControl>
               <Input
                 type="text"
@@ -107,6 +105,42 @@ const toggleDialog = () => {
             <FormMessage />
           </FormItem>
         </FormField>
+
+        <div className="grid grid-cols-2 gap-4">
+          <FormField
+            v-slot="{ componentField }"
+            name="sets"
+          >
+            <FormItem>
+              <FormLabel>Sets</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="3"
+                  v-bind="componentField"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <FormField
+            v-slot="{ componentField }"
+            name="reps"
+          >
+            <FormItem>
+              <FormLabel>Reps</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="10"
+                  v-bind="componentField"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+        </div>
       </form>
     </DialogContent>
   </Dialog>
