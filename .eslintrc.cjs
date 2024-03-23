@@ -3,13 +3,7 @@ module.exports = {
   parserOptions: {
     parser: "@typescript-eslint/parser",
   },
-  extends: [
-    "@nuxt/eslint-config",
-    "plugin:vue/vue3-recommended",
-    "prettier",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-  ],
+  extends: ["plugin:@typescript-eslint/recommended", "plugin:vue/vue3-recommended", "@nuxt/eslint-config"],
   rules: {
     "vue/multi-word-component-names": "off",
   },
