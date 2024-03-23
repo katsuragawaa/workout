@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ArrowLeftIcon } from "lucide-vue-next";
+import { ArrowLeftIcon, MoreVertical, Pencil, Trash2 } from "lucide-vue-next";
 
 const defaultWorkout = { name: "" };
 
