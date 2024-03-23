@@ -8,7 +8,7 @@ const isRunning = ref(false);
 const formattedTime = computed(() => {
   const minutes = Math.floor(time.value / 60);
   const seconds = time.value % 60;
-  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 });
 
 const clearTimer = () => {
@@ -46,7 +46,10 @@ onUnmounted(clearTimer);
 
 <template>
   <Drawer>
-    <DrawerTrigger as-child @click="startTimer">
+    <DrawerTrigger
+      as-child
+      @click="startTimer"
+    >
       <slot />
     </DrawerTrigger>
     <DrawerContent>
@@ -56,13 +59,27 @@ onUnmounted(clearTimer);
           <DrawerDescription>Pausa até a próxima atividade</DrawerDescription>
         </DrawerHeader>
 
-        <div class="p-4 text-center text-7xl font-bold tracking-tighter">{{ formattedTime }}</div>
+        <div class="p-4 text-center text-7xl font-bold tracking-tighter">
+          {{ formattedTime }}
+        </div>
 
         <DrawerFooter>
-          <Button v-if="isRunning" @click="pauseTimer">Pausar</Button>
-          <Button v-else @click="resumeTimer">Retomar</Button>
+          <Button
+            v-if="isRunning"
+            @click="pauseTimer"
+          >
+            Pausar
+          </Button>
+          <Button
+            v-else
+            @click="resumeTimer"
+          >
+            Retomar
+          </Button>
           <DrawerClose as-child>
-            <Button variant="outline">Fechar</Button>
+            <Button variant="outline">
+              Fechar
+            </Button>
           </DrawerClose>
         </DrawerFooter>
       </div>

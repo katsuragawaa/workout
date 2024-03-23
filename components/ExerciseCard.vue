@@ -14,13 +14,17 @@ const done = ref(false);
 const toggleDone = () => {
   done.value = !done.value;
 };
-
 </script>
 
 <template>
   <Card :class="{ 'opacity-50': done }">
     <CardHeader>
-      <Badge variant="outline" class="w-fit">{{ props.muscle }}</Badge>
+      <Badge
+        variant="outline"
+        class="w-fit"
+      >
+        {{ props.muscle }}
+      </Badge>
       <CardTitle>{{ props.name }}</CardTitle>
     </CardHeader>
 
@@ -39,7 +43,12 @@ const toggleDone = () => {
         <span>{{ props.weight }}</span>
       </div>
 
-      <Button variant="ghost" size="icon" @click="toggleDone" class="h-5 w-5">
+      <Button
+        variant="ghost"
+        size="icon"
+        class="h-5 w-5"
+        @click="toggleDone"
+      >
         <CheckSquare v-if="done" />
         <Square v-else />
       </Button>

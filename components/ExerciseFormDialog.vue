@@ -95,11 +95,7 @@ const toggleDialog = () => {
           <FormItem>
             <FormLabel>Músculo</FormLabel>
             <FormControl>
-              <Input
-                type="text"
-                placeholder="shadcn"
-                v-bind="componentField"
-              />
+              <MuscleCombobox v-bind="componentField" />
             </FormControl>
             <FormDescription> This is your public display name. </FormDescription>
             <FormMessage />

@@ -6,7 +6,6 @@ const props = defineProps<{
   description: string;
   id: number;
 }>();
-
 </script>
 
 <template>
@@ -17,7 +16,12 @@ const props = defineProps<{
         <CardDescription>{{ props.description }}</CardDescription>
       </div>
 
-      <Button as-child variant="outline" size="icon" class="min-w-10">
+      <Button
+        as-child
+        variant="outline"
+        size="icon"
+        class="min-w-10"
+      >
         <NuxtLink :href="`/workouts/${props.id}`">
           <ChevronRight class="h-4 w-4" />
         </NuxtLink>
