@@ -2,6 +2,8 @@
 import { Beef, Minus, MoreVertical, Pencil, Repeat2, Trash2, X } from "lucide-vue-next";
 
 const props = defineProps<{
+  id?: string;
+  workoutId: string;
   name: string;
   muscle: string;
   sets: number;
@@ -77,7 +79,12 @@ const confirmDelete = () => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <ExerciseFormDialog />
+      <ExerciseFormDialog
+        :open="openForm"
+        :exercise="props"
+        :workout-id="workoutId"
+        @update:open="openForm = $event"
+      />
       <!-- <DeleteAlertDialog open={openAlert} setOpen={setOpenAlert} onConfirm={confirmDelete} /> -->
     </div>
   </div>

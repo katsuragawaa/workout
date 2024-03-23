@@ -4,6 +4,15 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import * as z from "zod";
 
+// TODO: change these any types to the correct types
+const props = defineProps<{
+  open: boolean;
+  exercise?: any;
+  workoutId: string;
+}>();
+
+const emit = defineEmits(["update:open"]);
+
 const formSchema = toTypedSchema(
   z.object({
     id: z.string().uuid().optional(),
@@ -28,15 +37,77 @@ const defaultExercise = {
 
 const form = useForm({
   validationSchema: formSchema,
-  initialValues: defaultExercise,
+  initialValues: props.exercise || defaultExercise,
 });
 
-const onSubmit = form.handleSubmit((values) => {
-  console.log('Form submitted!', values)
-})
+const submit = form.handleSubmit((values) => {
+  console.log("Form submitted!", values);
+});
+
+const toggleDialog = () => {
+  form.resetForm();
+  emit("update:open", false)
+};
 
 </script>
 
 <template>
-  <div>hi</div>
+  <Dialog
+    :open="open"
+    @update:open="toggleDialog"
+  >
+    <DialogContent class="sm:max-w-[425px]">
+      <form
+        class="space-y-6"
+        @submit="submit"
+      >
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-medium">
+              Novo exercício
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Adicione atividades ao seu treino.
+            </p>
+          </div>
+        </div>
+
+        <FormField
+          v-slot="{ componentField }"
+          name="name"
+        >
+          <FormItem>
+            <FormLabel>Nome do exercício</FormLabel>
+            <FormControl>
+              <Input
+                type="text"
+                placeholder="Supino ereto"
+                v-bind="componentField"
+              />
+            </FormControl>
+            <FormDescription> This is your public display name. </FormDescription>
+            <FormMessage />
+          </FormItem>
+        </FormField>
+
+        <FormField
+          v-slot="{ componentField }"
+          name="username"
+        >
+          <FormItem>
+            <FormLabel>Username</FormLabel>
+            <FormControl>
+              <Input
+                type="text"
+                placeholder="shadcn"
+                v-bind="componentField"
+              />
+            </FormControl>
+            <FormDescription> This is your public display name. </FormDescription>
+            <FormMessage />
+          </FormItem>
+        </FormField>
+      </form>
+    </DialogContent>
+  </Dialog>
 </template>

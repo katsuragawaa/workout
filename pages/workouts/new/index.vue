@@ -31,6 +31,7 @@ const handleNewExercise = () => {
 };
 
 const mockExercise = {
+  id: "1",
   name: "Bench press",
   muscle: "Chest",
   sets: 4,
@@ -102,6 +103,7 @@ const mockExercise = {
           </div>
           <AccordionContent class="grid grid-cols-1 gap-3 md:grid-cols-2">
             <ExerciseFormItem
+              :workout-id="mockExercise.id"
               :name="mockExercise.name"
               :muscle="mockExercise.muscle"
               :sets="mockExercise.sets"
@@ -118,6 +120,13 @@ const mockExercise = {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
+      <ExerciseFormDialog
+        :open="openExerciseForm"
+        :exercise="undefined"
+        :workout-id="'teste'"
+        @update:open="openExerciseForm = $event"
+      />
     </main>
   </div>
 </template>
