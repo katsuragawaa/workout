@@ -26,7 +26,7 @@ const emit = defineEmits(["update:value"]);
     <PopoverContent class="w-fit p-0">
       <ScrollArea class="h-64">
         <Command>
-          <CommandInput placeholder="Busque por um grupo muscular..." />
+          <CommandInput placeholder="Busque pelo músculo" />
           <CommandEmpty>Não achei.</CommandEmpty>
           <CommandList>
             <CommandGroup>
