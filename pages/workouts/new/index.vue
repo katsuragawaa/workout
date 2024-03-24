@@ -1,42 +1,33 @@
 <script lang="ts" setup>
-import { ArrowLeftIcon, MoreVertical, Pencil, Trash2 } from "lucide-vue-next";
-
-const defaultWorkout = { name: "" };
+import { ArrowLeftIcon } from "lucide-vue-next";
 
 const openWorkoutForm = ref(false);
 const openExerciseForm = ref(false);
 const openAlert = ref(false);
-const selectedWorkout = ref(defaultWorkout);
+const selectedId = ref<string | undefined>();
 
-const handleNew = () => {
+const handleNew = (id: string) => {
   openWorkoutForm.value = true;
-  selectedWorkout.value = defaultWorkout;
 };
 
-const handleEdit = (workout: any) => {
+const handleEdit = (id: string) => {
   openWorkoutForm.value = true;
-  selectedWorkout.value = workout;
+  selectedId.value = id;
 };
 
-const handleDelete = (workout: any) => {
+const handleDelete = (id: string) => {
   openAlert.value = true;
+  selectedId.value = id;
 };
 
 const confirmDelete = () => {
-  console.log("Deleting workout");
+  console.log("Deleting workout:", selectedId.value);
 };
 
-const handleNewExercise = () => {
+const handleNewExercise = (id: string) => {
+  console.log("New exercise for workout:", id);
   openExerciseForm.value = true;
-};
-
-const mockExercise = {
-  id: "1",
-  name: "Bench press",
-  muscle: "chest",
-  sets: 4,
-  reps: 10,
-  weight: 20,
+  selectedId.value = id;
 };
 </script>
 
@@ -61,65 +52,13 @@ const mockExercise = {
         Planeje seu treco
       </p>
 
-      <Accordion
-        type="single"
-        collapsible
-      >
-        <AccordionItem value="1">
-          <div class="flex items-center gap-4">
-            <div class="flex-1">
-              <AccordionTrigger class="w-full pb-4 text-start text-2xl font-bold">
-                Workout 1
-              </AccordionTrigger>
-            </div>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger as-child>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                >
-                  <MoreVertical class="h-4 w-4" />
-                  <span class="sr-only">More</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem
-                  class="flex items-center gap-2"
-                  @click="() => handleEdit(defaultWorkout)"
-                >
-                  <Pencil class="h-3 w-3" />
-                  <span>Editar</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  class="flex items-center gap-2"
-                  @click="() => handleDelete(defaultWorkout)"
-                >
-                  <Trash2 class="h-3 w-3" />
-                  <span>Deletar</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          <AccordionContent class="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <ExerciseFormItem
-              :workout-id="mockExercise.id"
-              :name="mockExercise.name"
-              :muscle="mockExercise.muscle"
-              :sets="mockExercise.sets"
-              :reps="mockExercise.reps"
-            />
-
-            <Button
-              variant="secondary"
-              class="md:col-span-2"
-              @click="handleNewExercise"
-            >
-              Novo exercício
-            </Button>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      <WorkoutAccordion
+        :workout="selectedId"
+        @new="handleNew"
+        @edit="handleEdit"
+        @delete="handleDelete"
+        @new-exercise="handleNewExercise"
+      />
 
       <ExerciseFormDialog
         :open="openExerciseForm"
