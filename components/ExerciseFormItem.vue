@@ -2,7 +2,7 @@
 import { Beef, Minus, MoreVertical, Pencil, Repeat2, Trash2, X } from "lucide-vue-next";
 
 const props = defineProps<{
-  id?: string;
+  id: string;
   workoutId: string;
   name: string;
   muscle: string;
