@@ -55,6 +55,7 @@ const workouts = getWorkouts();
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
       <AccordionContent class="grid grid-cols-1 gap-3 md:grid-cols-2">
         <ExerciseFormItem
           v-for="exercise in exercises"
