@@ -134,6 +134,12 @@ const toggleDialog = () => {
             </FormItem>
           </FormField>
         </div>
+
+        <DialogFooter>
+          <Button type="submit">
+            Salvar
+          </Button>
+        </DialogFooter>
       </form>
     </DialogContent>
   </Dialog>
