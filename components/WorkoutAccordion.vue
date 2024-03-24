@@ -59,8 +59,9 @@ const workouts = getWorkouts();
       <AccordionContent class="grid grid-cols-1 gap-3 md:grid-cols-2">
         <ExerciseFormItem
           v-for="exercise in exercises"
+          :id="exercise.id"
           :key="exercise.id"
-          :workout-id="exercise.id"
+          :workout-id="workout.id"
           :name="exercise.name"
           :muscle="exercise.muscle"
           :sets="exercise.sets"
