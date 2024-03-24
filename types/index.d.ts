@@ -1,11 +1,11 @@
 type Workout = {
-  id: number;
+  id: string;
   name: string;
 };
 
 type Exercise = {
-  id: number;
-  workoutId: number;
+  id: string;
+  workoutId: string;
   name: string;
   muscle: string;
   sets: number;
