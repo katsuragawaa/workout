@@ -4,9 +4,9 @@ import { ArrowLeftIcon } from "lucide-vue-next";
 const openWorkoutForm = ref(false);
 const openExerciseForm = ref(false);
 const openAlert = ref(false);
-const selectedId = ref<string | undefined>();
+const selectedId = ref("");
 
-const handleNew = (id: string) => {
+const handleNew = () => {
   openWorkoutForm.value = true;
 };
 
@@ -25,7 +25,6 @@ const confirmDelete = () => {
 };
 
 const handleNewExercise = (id: string) => {
-  console.log("New exercise for workout:", id);
   openExerciseForm.value = true;
   selectedId.value = id;
 };
@@ -54,7 +53,6 @@ const handleNewExercise = (id: string) => {
 
       <WorkoutAccordion
         :workout="selectedId"
-        @new="handleNew"
         @edit="handleEdit"
         @delete="handleDelete"
         @new-exercise="handleNewExercise"
@@ -62,7 +60,7 @@ const handleNewExercise = (id: string) => {
 
       <ExerciseFormDialog
         :open="openExerciseForm"
-        :workout-id="'teste'"
+        :workout-id="selectedId"
         @update:open="openExerciseForm = $event"
       />
     </main>
