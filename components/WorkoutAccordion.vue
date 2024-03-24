@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { MoreVertical, Pencil, Trash2 } from "lucide-vue-next";
 import { getExercisesByWorkout, getWorkouts } from "~/lib/mock-db";
 
 const emit = defineEmits(["new", "edit", "delete", "new-exercise"]);
