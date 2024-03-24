@@ -1,8 +1,70 @@
 import type { Exercise, Workout } from "@/types";
 import { ulid } from "ulidx";
 
-const workouts: Workout[] = [];
-const exercises: Exercise[] = [];
+const workouts: Workout[] = [
+  {
+    id: ulid(),
+    name: "Push",
+  },
+  {
+    id: ulid(),
+    name: "Pull",
+  },
+  {
+    id: ulid(),
+    name: "Legs",
+  },
+];
+const exercises: Exercise[] = [
+  {
+    id: ulid(),
+    workoutId: workouts[0].id,
+    name: "Bench Press",
+    muscle: "Chest",
+    sets: 3,
+    reps: 10,
+  },
+  {
+    id: ulid(),
+    workoutId: workouts[0].id,
+    name: "Shoulder Press",
+    muscle: "Shoulders",
+    sets: 3,
+    reps: 10,
+  },
+  {
+    id: ulid(),
+    workoutId: workouts[1].id,
+    name: "Pull-ups",
+    muscle: "Back",
+    sets: 3,
+    reps: 10,
+  },
+  {
+    id: ulid(),
+    workoutId: workouts[1].id,
+    name: "Bicep Curls",
+    muscle: "Biceps",
+    sets: 3,
+    reps: 10,
+  },
+  {
+    id: ulid(),
+    workoutId: workouts[2].id,
+    name: "Squats",
+    muscle: "Legs",
+    sets: 3,
+    reps: 10,
+  },
+  {
+    id: ulid(),
+    workoutId: workouts[2].id,
+    name: "Deadlifts",
+    muscle: "Legs",
+    sets: 3,
+    reps: 10,
+  },
+];
 
 const getWorkouts = () => {
   return workouts;
