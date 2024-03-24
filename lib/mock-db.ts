@@ -1,4 +1,4 @@
-import type { Exercise, Workout } from "@/types";
+import type { Exercise, Workout } from "~/types";
 import { ulid } from "ulidx";
 
 const workouts: Workout[] = [
