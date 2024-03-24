@@ -16,9 +16,9 @@ const emit = defineEmits(["update:value"]);
         <Button
           variant="outline"
           role="combobox"
-          :class="['w-full', 'justify-between', value ? '' : 'text-muted-foreground']"
+          :class="['w-full', 'justify-between', props.value ? '' : 'text-muted-foreground']"
         >
-          {{ value ? muscles.find((muscle) => muscle.value === value)?.label : "Selecione um músculo" }}
+          {{ props.value ? muscles.find((muscle) => muscle.value === value)?.label : "Selecione um músculo" }}
           <ChevronsUpDown class-name="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </FormControl>
