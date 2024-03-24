@@ -3,7 +3,7 @@ import { muscles } from "@/lib/muscles";
 import { Check, ChevronsUpDown } from "lucide-vue-next";
 
 const props = defineProps<{
-  value: string;
+  value?: string;
 }>();
 
 const emit = defineEmits(["update:value"]);
