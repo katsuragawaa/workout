@@ -21,23 +21,22 @@ const formSchema = toTypedSchema(
     muscle: z.string().refine((value) => muscles.some((muscle) => muscle.value === value), {
       message: "You must select a valid option",
     }),
-    sets: z.coerce.number().min(1).max(5),
-    reps: z.coerce.number().min(1).max(30),
+    sets: z
+      .number()
+      .min(1)
+      .max(5)
+      .transform((val) => (isNaN(val) ? 0 : Number(val))),
+    reps: z
+      .number()
+      .min(1)
+      .max(30)
+      .transform((val) => (isNaN(val) ? 0 : Number(val))),
   }),
 );
 
-const defaultExercise = {
-  id: "",
-  workoutId: "",
-  name: "",
-  muscle: muscles[0].value,
-  sets: 1,
-  reps: 1,
-};
-
 const form = useForm({
   validationSchema: formSchema,
-  initialValues: props.exercise || defaultExercise,
+  initialValues: props.exercise || {},
 });
 
 const submit = form.handleSubmit((values) => {
@@ -45,6 +44,7 @@ const submit = form.handleSubmit((values) => {
 });
 
 const toggleDialog = () => {
+  console.log("props.exercise", props.exercise);
   form.resetForm();
   emit("update:open", false);
 };
@@ -88,16 +88,13 @@ const toggleDialog = () => {
           </FormItem>
         </FormField>
 
-        <FormField
-          v-slot="{ componentField }"
-          name="muscle"
-        >
+        <FormField name="muscle">
           <FormItem>
             <FormLabel>Músculo</FormLabel>
-            <FormControl>
-              <MuscleCombobox v-bind="componentField" />
-            </FormControl>
-            <FormDescription> This is your public display name. </FormDescription>
+            <MuscleCombobox
+              :value="form.values.muscle"
+              @update:value="form.setFieldValue('muscle', $event)"
+            />
             <FormMessage />
           </FormItem>
         </FormField>
