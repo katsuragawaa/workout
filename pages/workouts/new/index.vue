@@ -33,7 +33,7 @@ const handleNewExercise = () => {
 const mockExercise = {
   id: "1",
   name: "Bench press",
-  muscle: "Chest",
+  muscle: "chest",
   sets: 4,
   reps: 10,
   weight: 20,
@@ -123,7 +123,6 @@ const mockExercise = {
 
       <ExerciseFormDialog
         :open="openExerciseForm"
-        :exercise="undefined"
         :workout-id="'teste'"
         @update:open="openExerciseForm = $event"
       />
