@@ -1,5 +1,5 @@
-import type { Exercise, Workout } from "~/types";
 import { ulid } from "ulidx";
+import type { Exercise, Workout } from "~/types";
 
 const workouts: Workout[] = [
   {
@@ -70,6 +70,10 @@ const getWorkouts = () => {
   return workouts;
 };
 
+const getWorkoutById = (workoutId: string) => {
+  return workouts.find((workout) => workout.id === workoutId);
+};
+
 const getExercises = () => {
   return exercises;
 };
@@ -117,13 +121,14 @@ const deleteExerciseById = (exerciseId: string) => {
 };
 
 export {
-  deleteExerciseById,
-  deleteWorkoutById,
+  getWorkouts,
+  getWorkoutById,
   getExercises,
   getExercisesByWorkout,
-  getWorkouts,
-  saveExercise,
   saveWorkout,
-  updateExerciseById,
+  saveExercise,
   updateWorkoutById,
+  updateExerciseById,
+  deleteWorkoutById,
+  deleteExerciseById,
 };
