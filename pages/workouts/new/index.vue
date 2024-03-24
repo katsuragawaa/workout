@@ -65,6 +65,11 @@ const handleNewExercise = (id: string) => {
         Novo treino
       </Button>
 
+      <WorkoutFormDialog
+        :open="openWorkoutForm"
+        @update:open="openWorkoutForm = $event"
+      />
+
       <ExerciseFormDialog
         :open="openExerciseForm"
         :workout-id="selectedId"
