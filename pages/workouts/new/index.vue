@@ -58,6 +58,13 @@ const handleNewExercise = (id: string) => {
         @new-exercise="handleNewExercise"
       />
 
+      <Button
+        class="mt-10"
+        @click="handleNew"
+      >
+        Novo treino
+      </Button>
+
       <ExerciseFormDialog
         :open="openExerciseForm"
         :workout-id="selectedId"
