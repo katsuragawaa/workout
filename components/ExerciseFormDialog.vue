@@ -1,13 +1,15 @@
 <script lang="ts" setup>
-import { muscles } from "@/lib/muscles";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import * as z from "zod";
+import { useToast } from "~/components/ui/toast";
+import { saveExercise, updateExerciseById } from "~/lib/mock-db";
+import { muscles } from "~/lib/muscles";
+import type { Exercise } from "~/types";
 
-// TODO: change these any types to the correct types
 const props = defineProps<{
   open: boolean;
-  exercise?: any;
+  exercise?: Exercise;
   workoutId: string;
 }>();
 
@@ -15,8 +17,6 @@ const emit = defineEmits(["update:open"]);
 
 const formSchema = toTypedSchema(
   z.object({
-    id: z.string().uuid().optional(),
-    workoutId: z.string().uuid(),
     name: z.string().min(2, { message: "Name must be at least 2 characters long" }).max(50),
     muscle: z.string().refine((value) => muscles.some((muscle) => muscle.value === value), {
       message: "You must select a valid option",
@@ -34,13 +34,29 @@ const formSchema = toTypedSchema(
   }),
 );
 
+const { toast } = useToast();
+
 const form = useForm({
   validationSchema: formSchema,
   initialValues: props.exercise || {},
 });
 
 const submit = form.handleSubmit((values) => {
-  console.log("Form submitted!", values);
+  toast({
+    title: "You submitted the following values:",
+    description: h(
+      "pre",
+      { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" },
+      h(
+        "code",
+        { class: "text-white" },
+        JSON.stringify({ ...values, id: props.exercise?.id || "idk", workoutId: props.workoutId }, null, 2),
+      ),
+    ),
+  });
+
+  const id = props.exercise?.id;
+  id ? updateExerciseById(id, values) : saveExercise({ ...values, workoutId: props.workoutId });
 });
 
 const toggleDialog = () => {
