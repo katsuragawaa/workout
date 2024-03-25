@@ -14,19 +14,19 @@ export const useExercises = () => {
     },
   ]);
 
-  const getExercises = () => {
+  const getExercises = async () => {
     return exercises.value;
   };
 
-  const getExerciseById = (id: string) => {
+  const getExerciseById = async (id: string) => {
     return exercises.value.find((exercise) => exercise.id === id);
   };
 
-  const getExercisesByWorkoutId = (workoutId: string) => {
+  const getExercisesByWorkoutId = async (workoutId: string) => {
     return exercises.value.filter((exercise) => exercise.workoutId === workoutId);
   };
 
-  const getMusclesByWorkoutId = (workoutId: string) => {
+  const getMusclesByWorkoutId = async (workoutId: string) => {
     const muscles = new Set<string>();
     exercises.value
       .filter((exercise) => exercise.workoutId === workoutId)
@@ -37,11 +37,11 @@ export const useExercises = () => {
     return Array.from(muscles);
   };
 
-  const saveExercise = (exercise: Omit<Exercise, "id">) => {
+  const saveExercise = async (exercise: Omit<Exercise, "id">) => {
     exercises.value.push({ ...exercise, id: ulid() });
   };
 
-  const updateExercise = (id: string, exercise: Partial<Exercise>) => {
+  const updateExercise = async (id: string, exercise: Partial<Exercise>) => {
     const index = exercises.value.findIndex((exercise) => exercise.id === id);
     if (index === -1) {
       return;
@@ -50,7 +50,7 @@ export const useExercises = () => {
     exercises.value[index] = { ...exercises.value[index], ...exercise };
   };
 
-  const deleteExercise = (id: string) => {
+  const deleteExercise = async (id: string) => {
     const index = exercises.value.findIndex((exercise) => exercise.id === id);
     if (index === -1) {
       return;
