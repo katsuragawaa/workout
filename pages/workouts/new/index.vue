@@ -43,6 +43,7 @@ const handleNewExercise = (id: string) => {
   <div>
     <header class="container flex max-w-4xl items-center justify-between pt-14">
       <Button
+        as-child
         variant="outline"
         size="icon"
       >
