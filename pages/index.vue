@@ -3,12 +3,7 @@ import { muscles as m } from "~/lib/muscles";
 
 const { getWorkouts } = useWorkouts();
 const { getMusclesByWorkoutId } = useExercises();
-const workouts = getWorkouts();
-
-const getDescription = (id: string) => {
-  const muscles = getMusclesByWorkoutId(id);
-  return muscles.map((muscle) => m.find((m) => m.value === muscle)?.label).join(", ");
-};
+const workouts = await getWorkouts();
 </script>
 
 <template>
@@ -32,7 +27,6 @@ const getDescription = (id: string) => {
           :id="workout.id"
           :key="workout.id"
           :name="workout.name"
-          :description="getDescription(workout.id)"
         />
       </section>
 
