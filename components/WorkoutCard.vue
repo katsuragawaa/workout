@@ -5,8 +5,11 @@ import { capitalize } from "vue";
 const props = defineProps<{
   id: string;
   name: string;
-  description: string;
 }>();
+
+const { getMusclesByWorkoutId } = useExercises();
+
+const description = (await getMusclesByWorkoutId(props.id)).join(", ");
 </script>
 
 <template>
@@ -14,7 +17,7 @@ const props = defineProps<{
     <CardHeader class="flex flex-row items-center justify-between gap-4">
       <div class="space-y-1.5">
         <CardTitle>{{ props.name }}</CardTitle>
-        <CardDescription>{{ capitalize(props.description) }}</CardDescription>
+        <CardDescription>{{ capitalize(description) }}</CardDescription>
       </div>
 
       <Button
