@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ChevronRight } from "lucide-vue-next";
+import { capitalize } from "vue";
 
 const props = defineProps<{
   id: string;
@@ -13,7 +14,7 @@ const props = defineProps<{
     <CardHeader class="flex flex-row items-center justify-between gap-4">
       <div class="space-y-1.5">
         <CardTitle>{{ props.name }}</CardTitle>
-        <CardDescription>{{ props.description }}</CardDescription>
+        <CardDescription>{{ capitalize(props.description) }}</CardDescription>
       </div>
 
       <Button
