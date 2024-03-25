@@ -57,14 +57,14 @@ const exercises = getExercisesByWorkoutId(workout.id);
         </Button>
       </TimerDrawer>
 
-      <Button
+      <!-- <Button
         variant="outline"
         class="mt-2"
       >
         <NuxtLink :to="`/workouts/${workout.id}`">
           Editar treino
         </NuxtLink>
-      </Button>
+      </Button> -->
     </main>
   </div>
 </template>

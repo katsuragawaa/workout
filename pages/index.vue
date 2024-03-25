@@ -39,7 +39,7 @@ const getDescription = (id: string) => {
           href="/workouts/new"
           class="mt-10"
         >
-          Novo Treino
+          Editar Treino
         </NuxtLink>
       </Button>
     </main>
