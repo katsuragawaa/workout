@@ -24,17 +24,12 @@ const formSchema = toTypedSchema(
 
 const form = useForm({
   validationSchema: formSchema,
+  initialValues: {
+    name: props.workout?.name ?? "",
+  },
 });
 
-watch(
-  () => props.workout,
-  (workout) => {
-    form.setValues(workout || {});
-  },
-  { immediate: true },
-);
-
-const submit = form.handleSubmit((values) => {
+const submit = form.handleSubmit(async (values) => {
   toast({
     title: "You submitted the following values:",
     description: h(
@@ -45,7 +40,7 @@ const submit = form.handleSubmit((values) => {
   });
 
   const id = props.workout?.id;
-  id ? updateWorkout(id, values) : saveWorkout(values);
+  id ? await updateWorkout(id, values) : await saveWorkout(values);
 
   emit("update:open", false);
 });

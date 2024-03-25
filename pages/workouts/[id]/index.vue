@@ -6,12 +6,12 @@ const { getWorkoutById } = useWorkouts();
 const { getExercisesByWorkoutId } = useExercises();
 
 const workoutId = route.params.id;
-const workout = getWorkoutById(workoutId as string);
+const workout = await getWorkoutById(workoutId as string);
 if (!workout) {
   throw new Error("Workout not found");
 }
 
-const exercises = getExercisesByWorkoutId(workout.id);
+const exercises = await getExercisesByWorkoutId(workout.id);
 </script>
 
 <template>

@@ -29,8 +29,8 @@ const handleDelete = (id: string) => {
   selectedId.value = id;
 };
 
-const confirmDelete = () => {
-  deleteWorkout(selectedId.value);
+const confirmDelete = async () => {
+  await deleteWorkout(selectedId.value);
 };
 
 const handleNewExercise = (id: string) => {

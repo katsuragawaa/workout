@@ -10,19 +10,19 @@ export const useWorkouts = () => {
     },
   ]);
 
-  const getWorkouts = () => {
+  const getWorkouts = async () => {
     return workouts.value;
   };
 
-  const getWorkoutById = (id: string) => {
+  const getWorkoutById = async (id: string) => {
     return workouts.value.find((workout) => workout.id === id);
   };
 
-  const saveWorkout = (workout: Omit<Workout, "id">) => {
+  const saveWorkout = async (workout: Omit<Workout, "id">) => {
     workouts.value.push({ ...workout, id: ulid() });
   };
 
-  const updateWorkout = (id: string, workout: Partial<Workout>) => {
+  const updateWorkout = async (id: string, workout: Partial<Workout>) => {
     const index = workouts.value.findIndex((workout) => workout.id === id);
     if (index === -1) {
       return;
@@ -31,7 +31,7 @@ export const useWorkouts = () => {
     workouts.value[index] = { ...workouts.value[index], ...workout };
   };
 
-  const deleteWorkout = (id: string) => {
+  const deleteWorkout = async (id: string) => {
     const index = workouts.value.findIndex((workout) => workout.id === id);
     if (index === -1) {
       return;
