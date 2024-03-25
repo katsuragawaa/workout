@@ -13,6 +13,8 @@ const props = defineProps<{
 const openForm = ref(false);
 const openAlert = ref(false);
 
+const { deleteExercise } = useExercises();
+
 const handleEdit = () => {
   openForm.value = true;
 };
@@ -22,7 +24,7 @@ const handleDelete = () => {
 };
 
 const confirmDelete = () => {
-  console.log("Deleting exercise");
+  deleteExercise(props.id);
 };
 </script>
 
@@ -85,7 +87,12 @@ const confirmDelete = () => {
         :workout-id="workoutId"
         @update:open="openForm = $event"
       />
-      <!-- <DeleteAlertDialog open={openAlert} setOpen={setOpenAlert} onConfirm={confirmDelete} /> -->
+
+      <DeleteAlertDialog
+        :open="openAlert"
+        @update:open="openAlert = $event"
+        @confirm="confirmDelete"
+      />
     </div>
   </div>
 </template>
