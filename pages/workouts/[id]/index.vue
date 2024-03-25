@@ -1,13 +1,17 @@
 <script lang="ts" setup>
 import { ArrowLeftIcon, Timer } from "lucide-vue-next";
 
-const mockExercise = {
-  name: "Bench press",
-  muscle: "Chest",
-  sets: 4,
-  reps: 10,
-  weight: 20,
-};
+const route = useRoute();
+const { getWorkoutById } = useWorkouts();
+const { getExercisesByWorkoutId } = useExercises();
+
+const workoutId = route.params.id;
+const workout = getWorkoutById(workoutId as string);
+if (!workout) {
+  throw new Error("Workout not found");
+}
+
+const exercises = getExercisesByWorkoutId(workout.id);
 </script>
 
 <template>
@@ -31,16 +35,18 @@ const mockExercise = {
 
     <main class="container flex max-w-2xl flex-col py-10">
       <h1 class="text-5xl font-extrabold">
-        NOME DO WORKOUT
+        {{ workout.name }}
       </h1>
 
       <div class="grid grid-cols-1 gap-3 pt-10 md:grid-cols-2">
         <ExerciseCard
-          :name="mockExercise.name"
-          :muscle="mockExercise.muscle"
-          :sets="mockExercise.sets"
-          :reps="mockExercise.reps"
-          :weight="mockExercise.weight"
+          v-for="exercise in exercises"
+          :key="exercise.id"
+          :name="exercise.name"
+          :muscle="exercise.muscle"
+          :sets="exercise.sets"
+          :reps="exercise.reps"
+          :weight="exercise.weight || 0"
         />
       </div>
 
@@ -54,7 +60,7 @@ const mockExercise = {
         variant="outline"
         class="mt-2"
       >
-        <NuxtLink :to="`/workouts/${1}`">
+        <NuxtLink :to="`/workouts/${workout.id}`">
           Editar treino
         </NuxtLink>
       </Button>
