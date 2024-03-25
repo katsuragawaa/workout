@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import { CheckSquare, Repeat2, Square, Weight, X } from "lucide-vue-next";
+import { capitalize } from "vue";
+import { muscles } from "~/lib/muscles";
 
 const props = defineProps<{
   name: string;
@@ -10,6 +12,8 @@ const props = defineProps<{
 }>();
 
 const done = ref(false);
+
+const muscle = muscles.find((m) => m.value === props.muscle)?.label || "inválido";
 
 const toggleDone = () => {
   done.value = !done.value;
@@ -23,7 +27,7 @@ const toggleDone = () => {
         variant="outline"
         class="w-fit"
       >
-        {{ props.muscle }}
+        {{ capitalize(muscle) }}
       </Badge>
       <CardTitle>{{ props.name }}</CardTitle>
     </CardHeader>
