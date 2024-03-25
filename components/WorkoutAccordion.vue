@@ -40,7 +40,7 @@ const workouts = getWorkouts();
           <DropdownMenuContent>
             <DropdownMenuItem
               class="flex items-center gap-2"
-              @click="emit('edit', workout.id)"
+              @click="emit('edit', workout)"
             >
               <Pencil class="h-3 w-3" />
               <span>Editar</span>
