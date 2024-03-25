@@ -2,9 +2,9 @@
 import { ChevronRight } from "lucide-vue-next";
 
 const props = defineProps<{
-  title: string;
+  id: string;
+  name: string;
   description: string;
-  id: number;
 }>();
 </script>
 
@@ -12,7 +12,7 @@ const props = defineProps<{
   <Card>
     <CardHeader class="flex flex-row items-center justify-between gap-4">
       <div class="space-y-1.5">
-        <CardTitle>{{ props.title }}</CardTitle>
+        <CardTitle>{{ props.name }}</CardTitle>
         <CardDescription>{{ props.description }}</CardDescription>
       </div>
 

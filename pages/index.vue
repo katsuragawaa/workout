@@ -1,5 +1,12 @@
 <script lang="ts" setup>
+const { getWorkouts } = useWorkouts();
+const { getMusclesByWorkoutId } = useExercises();
+const workouts = getWorkouts();
 
+const getDescription = (id: string) => {
+  const muscles = getMusclesByWorkoutId(id);
+  return muscles.join(", ");
+};
 </script>
 
 <template>
@@ -18,11 +25,12 @@
       </h1>
 
       <section class="flex flex-col gap-4">
-        <!-- map workouts -->
         <WorkoutCard
-          :id="1"
-          title="Test workout"
-          description="Lopem ipsum"
+          v-for="workout in workouts"
+          :id="workout.id"
+          :key="workout.id"
+          :name="workout.name"
+          :description="getDescription(workout.id)"
         />
       </section>
 
