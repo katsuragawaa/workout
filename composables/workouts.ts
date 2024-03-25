@@ -2,8 +2,13 @@ import { useStorage } from "@vueuse/core";
 import { ulid } from "ulidx";
 import type { Workout } from "~/types";
 
-export const useUseWorkouts = () => {
-  const workouts = useStorage<Workout[]>("workouts", []);
+export const useWorkouts = () => {
+  const workouts = useStorage<Workout[]>("workouts", [
+    {
+      id: "1",
+      name: "Workout 1",
+    },
+  ]);
 
   const getWorkouts = () => {
     return workouts.value;

@@ -3,7 +3,6 @@ import { useToast } from "@/components/ui/toast";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import * as z from "zod";
-import { saveWorkout, updateWorkoutById } from "~/lib/mock-db";
 import type { Workout } from "~/types";
 
 const props = defineProps<{
@@ -14,6 +13,8 @@ const props = defineProps<{
 const emit = defineEmits(["update:open"]);
 
 const { toast } = useToast();
+
+const { saveWorkout, updateWorkout } = useWorkouts();
 
 const formSchema = toTypedSchema(
   z.object({
@@ -44,7 +45,7 @@ const submit = form.handleSubmit((values) => {
   });
 
   const id = props.workout?.id;
-  id ? updateWorkoutById(id, values) : saveWorkout(values);
+  id ? updateWorkout(id, values) : saveWorkout(values);
 });
 
 const toggleDialog = () => {

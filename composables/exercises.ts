@@ -2,8 +2,17 @@ import { useStorage } from "@vueuse/core";
 import { ulid } from "ulidx";
 import type { Exercise } from "~/types";
 
-export const useUseExercises = () => {
-  const exercises = useStorage<Exercise[]>("exercises", []);
+export const useExercises = () => {
+  const exercises = useStorage<Exercise[]>("exercises", [
+    {
+      id: ulid(),
+      workoutId: "1",
+      name: "Exercise 1",
+      muscle: "Chest",
+      sets: 3,
+      reps: 10,
+    },
+  ]);
 
   const getExercises = () => {
     return exercises.value;
@@ -11,6 +20,10 @@ export const useUseExercises = () => {
 
   const getExerciseById = (id: string) => {
     return exercises.value.find((exercise) => exercise.id === id);
+  };
+
+  const getExercisesByWorkoutId = (workoutId: string) => {
+    return exercises.value.filter((exercise) => exercise.workoutId === workoutId);
   };
 
   const saveExercise = (exercise: Omit<Exercise, "id">) => {
@@ -38,6 +51,7 @@ export const useUseExercises = () => {
   return {
     getExercises,
     getExerciseById,
+    getExercisesByWorkoutId,
     saveExercise,
     updateExercise,
     deleteExercise,

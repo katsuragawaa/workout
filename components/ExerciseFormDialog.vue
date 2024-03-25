@@ -3,7 +3,6 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import * as z from "zod";
 import { useToast } from "~/components/ui/toast";
-import { saveExercise, updateExerciseById } from "~/lib/mock-db";
 import { muscles } from "~/lib/muscles";
 import type { Exercise } from "~/types";
 
@@ -36,6 +35,8 @@ const formSchema = toTypedSchema(
 
 const { toast } = useToast();
 
+const { saveExercise, updateExercise } = useExercises();
+
 const form = useForm({
   validationSchema: formSchema,
   initialValues: props.exercise || {},
@@ -56,7 +57,7 @@ const submit = form.handleSubmit((values) => {
   });
 
   const id = props.exercise?.id;
-  id ? updateExerciseById(id, values) : saveExercise({ ...values, workoutId: props.workoutId });
+  id ? updateExercise(id, values) : saveExercise({ ...values, workoutId: props.workoutId });
 });
 
 const toggleDialog = () => {

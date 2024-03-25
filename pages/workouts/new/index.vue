@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ArrowLeftIcon } from "lucide-vue-next";
-import { deleteWorkoutById } from "~/lib/mock-db";
 import type { Workout } from "~/types";
 
 const openWorkoutForm = ref(false);
@@ -8,6 +7,8 @@ const openExerciseForm = ref(false);
 const openAlert = ref(false);
 const selectedId = ref("");
 const workout = ref<Workout>();
+
+const { deleteWorkout } = useWorkouts();
 
 const openUpdate = (open: boolean) => {
   openWorkoutForm.value = open;
@@ -29,7 +30,7 @@ const handleDelete = (id: string) => {
 };
 
 const confirmDelete = () => {
-  deleteWorkoutById(selectedId.value);
+  deleteWorkout(selectedId.value);
 };
 
 const handleNewExercise = (id: string) => {
