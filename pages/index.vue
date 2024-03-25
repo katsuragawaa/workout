@@ -12,7 +12,7 @@ const getDescription = (id: string) => {
 <template>
   <div>
     <header class="container flex max-w-4xl items-center justify-end pt-14">
-      <!-- <theme-toggle /> -->
+      <ThemeToggle />
     </header>
 
     <main class="container flex max-w-xl flex-col py-10">
