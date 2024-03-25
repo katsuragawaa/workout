@@ -7,6 +7,7 @@ const selectedId = ref<string>("");
 const { getWorkouts } = useWorkouts();
 const { getExercisesByWorkoutId } = useExercises();
 
+const workouts = await getWorkouts();
 </script>
 
 <template>
