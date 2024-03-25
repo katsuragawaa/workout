@@ -26,6 +26,17 @@ export const useExercises = () => {
     return exercises.value.filter((exercise) => exercise.workoutId === workoutId);
   };
 
+  const getMusclesByWorkoutId = (workoutId: string) => {
+    const muscles = new Set<string>();
+    exercises.value
+      .filter((exercise) => exercise.workoutId === workoutId)
+      .forEach((exercise) => {
+        muscles.add(exercise.muscle);
+      });
+
+    return Array.from(muscles);
+  };
+
   const saveExercise = (exercise: Omit<Exercise, "id">) => {
     exercises.value.push({ ...exercise, id: ulid() });
   };
@@ -52,6 +63,7 @@ export const useExercises = () => {
     getExercises,
     getExerciseById,
     getExercisesByWorkoutId,
+    getMusclesByWorkoutId,
     saveExercise,
     updateExercise,
     deleteExercise,
