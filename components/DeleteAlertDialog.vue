@@ -3,7 +3,7 @@ const props = defineProps<{
   open: boolean;
 }>();
 
-const emit = defineEmits(["update:open", "delete"]);
+const emit = defineEmits(["update:open", "confirm"]);
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const emit = defineEmits(["update:open", "delete"]);
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-        <AlertDialogAction @click="emit('delete')">
+        <AlertDialogAction @click="emit('confirm')">
           Continuar
         </AlertDialogAction>
       </AlertDialogFooter>
