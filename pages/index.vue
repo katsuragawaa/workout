@@ -1,11 +1,13 @@
 <script lang="ts" setup>
+import { muscles as m } from "~/lib/muscles";
 const { getWorkouts } = useWorkouts();
 const { getMusclesByWorkoutId } = useExercises();
 const workouts = getWorkouts();
 
 const getDescription = (id: string) => {
   const muscles = getMusclesByWorkoutId(id);
-  return muscles.join(", ");
+  const muscleNames = muscles.map((muscle) => m.find((m) => m.value === muscle)?.label);
+  return muscleNames.join(", ");
 };
 </script>
 
