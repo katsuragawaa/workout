@@ -1,18 +1,25 @@
 <script lang="ts" setup>
 import { ArrowLeftIcon } from "lucide-vue-next";
+import type { Workout } from "~/types";
 
 const openWorkoutForm = ref(false);
 const openExerciseForm = ref(false);
 const openAlert = ref(false);
 const selectedId = ref("");
+const workout = ref<Workout>();
 
-const handleNew = () => {
-  openWorkoutForm.value = true;
+const openUpdate = (open: boolean) => {
+  openWorkoutForm.value = open;
+  workout.value = undefined;
 };
 
-const handleEdit = (id: string) => {
+const handleNew = () => {
+  openUpdate(true);
+};
+
+const handleEdit = (w: Workout) => {
   openWorkoutForm.value = true;
-  selectedId.value = id;
+  workout.value = w;
 };
 
 const handleDelete = (id: string) => {
@@ -52,7 +59,6 @@ const handleNewExercise = (id: string) => {
       </p>
 
       <WorkoutAccordion
-        :workout="selectedId"
         @edit="handleEdit"
         @delete="handleDelete"
         @new-exercise="handleNewExercise"
@@ -67,7 +73,8 @@ const handleNewExercise = (id: string) => {
 
       <WorkoutFormDialog
         :open="openWorkoutForm"
-        @update:open="openWorkoutForm = $event"
+        :workout="workout"
+        @update:open="openUpdate"
       />
 
       <ExerciseFormDialog

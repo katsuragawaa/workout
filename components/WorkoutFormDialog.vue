@@ -13,18 +13,25 @@ const props = defineProps<{
 
 const emit = defineEmits(["update:open"]);
 
+const { toast } = useToast();
+
 const formSchema = toTypedSchema(
   z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters long" }).max(50),
   }),
 );
 
-const { toast } = useToast();
-
 const form = useForm({
   validationSchema: formSchema,
-  initialValues: props.workout || {},
 });
+
+watch(
+  () => props.workout,
+  (workout) => {
+    form.setValues(workout || {});
+  },
+  { immediate: true },
+);
 
 const submit = form.handleSubmit((values) => {
   toast({
