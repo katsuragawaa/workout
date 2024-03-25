@@ -61,7 +61,7 @@ const handleNewExercise = (id: string) => {
         Planeje seu treco
       </p>
 
-      <WorkoutAccordion
+      <WorkoutAccordionList
         @edit="handleEdit"
         @delete="handleDelete"
         @new-exercise="handleNewExercise"
