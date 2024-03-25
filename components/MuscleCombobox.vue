@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { muscles } from "@/lib/muscles";
 import { Check, ChevronsUpDown } from "lucide-vue-next";
+import { capitalize } from "vue";
 
 const props = defineProps<{
   value?: string;
@@ -18,7 +19,11 @@ const emit = defineEmits(["update:value"]);
           role="combobox"
           :class="['w-full', 'justify-between', props.value ? '' : 'text-muted-foreground']"
         >
-          {{ props.value ? muscles.find((muscle) => muscle.value === value)?.label : "Selecione um músculo" }}
+          {{
+            props.value
+              ? capitalize(muscles.find((muscle) => muscle.value === value)?.label || "Inválido")
+              : "Selecione um músculo"
+          }}
           <ChevronsUpDown class-name="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </FormControl>
@@ -37,7 +42,7 @@ const emit = defineEmits(["update:value"]);
                 @select="emit('update:value', muscle.value)"
               >
                 <Check :class="['mr-2 h-4 w-4', muscle.value === value ? 'opacity-100' : 'opacity-0']" />
-                {{ muscle.label }}
+                {{ capitalize(muscle.label) }}
               </CommandItem>
             </CommandGroup>
           </CommandList>
