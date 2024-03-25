@@ -88,7 +88,7 @@ const handleNewExercise = (id: string) => {
       <DeleteAlertDialog
         :open="openAlert"
         @update:open="openAlert = $event"
-        @delete="confirmDelete"
+        @confirm="confirmDelete"
       />
     </main>
   </div>
