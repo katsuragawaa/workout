@@ -17,14 +17,15 @@ const exercises = getExercisesByWorkoutId(workout.id);
 <template>
   <div>
     <header class="container flex max-w-4xl items-center justify-between pt-14">
-      <NuxtLink to="/">
-        <Button
-          variant="outline"
-          size="icon"
-        >
+      <Button
+        as-child
+        variant="outline"
+        size="icon"
+      >
+        <NuxtLink to="/">
           <ArrowLeftIcon class="h-4 w-4" />
-        </Button>
-      </NuxtLink>
+        </NuxtLink>
+      </Button>
 
       <TimerDrawer>
         <Button size="icon">
