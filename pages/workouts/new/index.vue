@@ -6,22 +6,22 @@ const openWorkoutForm = ref(false);
 const openExerciseForm = ref(false);
 const openAlert = ref(false);
 const selectedId = ref("");
-const workout = ref<Workout>();
+const selectedWorkout = ref<Workout>();
 
 const { deleteWorkout } = useWorkouts();
 
 const openUpdate = (open: boolean) => {
   openWorkoutForm.value = open;
-  workout.value = undefined;
+  selectedWorkout.value = undefined;
 };
 
 const handleNew = () => {
   openUpdate(true);
 };
 
-const handleEdit = (w: Workout) => {
+const handleEdit = (workout: Workout) => {
   openWorkoutForm.value = true;
-  workout.value = w;
+  selectedWorkout.value = workout;
 };
 
 const handleDelete = (id: string) => {
@@ -75,18 +75,21 @@ const handleNewExercise = (id: string) => {
       </Button>
 
       <WorkoutFormDialog
+        v-if="openWorkoutForm"
         :open="openWorkoutForm"
-        :workout="workout"
+        :workout="selectedWorkout"
         @update:open="openUpdate"
       />
 
       <ExerciseFormDialog
+        v-if="openExerciseForm"
         :open="openExerciseForm"
         :workout-id="selectedId"
         @update:open="openExerciseForm = $event"
       />
 
       <DeleteAlertDialog
+        v-if="openAlert"
         :open="openAlert"
         @update:open="openAlert = $event"
         @confirm="confirmDelete"
