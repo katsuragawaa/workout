@@ -46,6 +46,8 @@ const submit = form.handleSubmit((values) => {
 
   const id = props.workout?.id;
   id ? updateWorkout(id, values) : saveWorkout(values);
+
+  emit("update:open", false);
 });
 
 const toggleDialog = () => {
