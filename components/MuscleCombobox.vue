@@ -21,7 +21,7 @@ const emit = defineEmits(["update:value"]);
         >
           {{
             props.value
-              ? capitalize(muscles.find((muscle) => muscle.value === value)?.label || "Inválido")
+              ? capitalize(muscles.find((muscle) => muscle.value === value)?.label || "inválido")
               : "Selecione um músculo"
           }}
           <ChevronsUpDown class-name="ml-2 h-4 w-4 shrink-0 opacity-50" />

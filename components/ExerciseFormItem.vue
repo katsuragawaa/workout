@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import { Beef, Minus, MoreVertical, Pencil, Repeat2, Trash2, X } from "lucide-vue-next";
+import { capitalize } from "vue";
+import { muscles } from "~/lib/muscles";
 
 const props = defineProps<{
   id: string;
@@ -12,6 +14,8 @@ const props = defineProps<{
 
 const openForm = ref(false);
 const openAlert = ref(false);
+
+const muscle = muscles.find((m) => m.value === props.muscle)?.label || "inválido";
 
 const { deleteExercise } = useExercises();
 
@@ -38,7 +42,7 @@ const confirmDelete = () => {
         <div class="flex items-center text-xs">
           <div class="flex flex-row items-center gap-1">
             <Beef class="h-4 w-4" />
-            {{ props.muscle }}
+            {{ capitalize(muscle) }}
           </div>
           <Minus class="h-4 w-4 rotate-90 transform" />
           <div class="flex flex-row items-center gap-1">
