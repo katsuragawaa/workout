@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ArrowLeftIcon } from "lucide-vue-next";
+import { deleteWorkoutById } from "~/lib/mock-db";
 import type { Workout } from "~/types";
 
 const openWorkoutForm = ref(false);
@@ -28,7 +29,7 @@ const handleDelete = (id: string) => {
 };
 
 const confirmDelete = () => {
-  console.log("Deleting workout:", selectedId.value);
+  deleteWorkoutById(selectedId.value);
 };
 
 const handleNewExercise = (id: string) => {
@@ -81,6 +82,12 @@ const handleNewExercise = (id: string) => {
         :open="openExerciseForm"
         :workout-id="selectedId"
         @update:open="openExerciseForm = $event"
+      />
+
+      <DeleteAlertDialog
+        :open="openAlert"
+        @update:open="openAlert = $event"
+        @delete="confirmDelete"
       />
     </main>
   </div>
