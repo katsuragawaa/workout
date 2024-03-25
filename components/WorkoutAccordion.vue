@@ -7,7 +7,7 @@ const selectedId = ref<string>("");
 const { getWorkouts } = useWorkouts();
 const { getExercisesByWorkoutId } = useExercises();
 
-const workouts = getWorkouts();
+const workouts = computed(() => getWorkouts());
 const exercises = computed(() => getExercisesByWorkoutId(selectedId.value));
 </script>
 
