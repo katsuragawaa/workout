@@ -8,7 +8,7 @@ export const useExercises = () => {
       id: ulid(),
       workoutId: "1",
       name: "Exercise 1",
-      muscle: "Chest",
+      muscle: "chest",
       sets: 3,
       reps: 10,
     },
