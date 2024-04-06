@@ -66,6 +66,12 @@
  
     --ring: 0 0% 83.1%;
   }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
  
 @layer base {
