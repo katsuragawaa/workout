@@ -43,11 +43,7 @@ const exercises = getExercisesByWorkoutId(workout.id);
         <ExerciseCard
           v-for="exercise in exercises"
           :key="exercise.id"
-          :name="exercise.name"
-          :muscle="exercise.muscle"
-          :sets="exercise.sets"
-          :reps="exercise.reps"
-          :weight="exercise.weight || 0"
+          :exercise="exercise"
         />
       </div>
 

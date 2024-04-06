@@ -1,19 +1,16 @@
 <script lang="ts" setup>
-import { CheckSquare, Repeat2, Square, Weight, X } from "lucide-vue-next";
+import { CheckSquare, Repeat2, Square, X } from "lucide-vue-next";
 import { capitalize } from "vue";
 import { muscles } from "~/lib/muscles";
+import type { Exercise } from "~/types";
 
 const props = defineProps<{
-  name: string;
-  muscle: string;
-  sets: number;
-  reps: number;
-  weight: number;
+  exercise: Exercise;
 }>();
 
 const done = ref(false);
 
-const muscle = muscles.find((m) => m.value === props.muscle)?.label || "inválido";
+const muscle = muscles.find((m) => m.value === props.exercise.muscle)?.label || "inválido";
 
 const toggleDone = () => {
   done.value = !done.value;
@@ -29,23 +26,23 @@ const toggleDone = () => {
       >
         {{ capitalize(muscle) }}
       </Badge>
-      <CardTitle>{{ props.name }}</CardTitle>
+      <CardTitle>{{ props.exercise.name }}</CardTitle>
     </CardHeader>
 
     <CardContent class="flex items-center justify-between">
       <div class="flex items-center gap-1">
-        <Repeat2 class="h-5 w-5" />
+        <Repeat2 class="size-5" />
         <span>
-          {{ props.sets }}
-          <X class="mb-0.5 inline-block h-4 w-4" />
-          {{ props.reps }}
+          {{ props.exercise.sets }}
+          <X class="mb-0.5 inline-block size-4" />
+          {{ props.exercise.reps }}
         </span>
       </div>
 
-      <div class="flex items-center gap-1">
-        <Weight class="h-5 w-5" />
-        <span>{{ props.weight }}</span>
-      </div>
+      <WeightInput
+        :id="props.exercise.id"
+        :weight="props.exercise.weight || 0"
+      />
 
       <Button
         variant="ghost"
