@@ -44,7 +44,7 @@ const toggleDone = () => {
 
       <WeightInput
         :id="props.exercise.id"
-        :weight="props.exercise.weight || 0"
+        :weight="props.exercise.weight"
       />
 
       <Button

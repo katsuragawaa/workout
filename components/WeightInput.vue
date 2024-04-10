@@ -6,7 +6,7 @@ import { toast } from "~/components/ui/toast";
 
 const props = defineProps<{
   id: string;
-  weight: number;
+  weight?: number;
 }>();
 
 const { handleSubmit } = useForm({ initialValues: { weight: props.weight } });
