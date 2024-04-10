@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ArrowLeftIcon, Timer } from "lucide-vue-next";
 
+const openConfirm = ref(false);
+
 const route = useRoute();
 const router = useRouter();
 
@@ -61,10 +63,18 @@ const finish = () => {
 
       <Button
         class="mt-10"
-        @click="finish"
+        @click="openConfirm = true"
       >
         Concluir treino
       </Button>
     </main>
+
+    <ConfirmDialog
+      :open="openConfirm"
+      title="Concluir treino"
+      description="Tem certeza que deseja concluir o treino?"
+      @update:open="openConfirm = $event"
+      @confirm="finish"
+    />
   </div>
 </template>
