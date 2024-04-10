@@ -8,7 +8,7 @@ const props = defineProps<{
   exercise: Exercise;
 }>();
 
-const done = ref(props.exercise.done);
+const done = ref(props.exercise.done ?? false);
 
 const { updateExercise } = useExercises();
 
