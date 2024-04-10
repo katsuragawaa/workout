@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const initialTime = 120;
+const initialTime = 90;
 let timerId: ReturnType<typeof setInterval> | null = null;
 
 const time = ref(initialTime);
@@ -77,9 +77,7 @@ onUnmounted(clearTimer);
             Retomar
           </Button>
           <DrawerClose as-child>
-            <Button variant="outline">
-              Fechar
-            </Button>
+            <Button variant="outline"> Fechar </Button>
           </DrawerClose>
         </DrawerFooter>
       </div>
