@@ -1,7 +1,7 @@
 type Workout = {
   id: string;
   name: string;
-  finishedAt: Date;
+  finishedAt?: Date;
 };
 
 type Exercise = {
