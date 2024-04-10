@@ -1,6 +1,7 @@
 type Workout = {
   id: string;
   name: string;
+  doneAt: Date;
 };
 
 type Exercise = {
@@ -11,6 +12,7 @@ type Exercise = {
   sets: number;
   reps: number;
   weight?: number;
+  done?: boolean;
 };
 
 export type { Workout, Exercise };
