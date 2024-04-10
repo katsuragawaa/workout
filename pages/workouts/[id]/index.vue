@@ -16,7 +16,7 @@ const exercises = getExercisesByWorkoutId(workout.id);
 
 <template>
   <div>
-    <header class="container flex max-w-4xl items-center justify-between pt-14">
+    <header class="container sticky top-0 z-10 flex max-w-4xl items-center justify-between bg-background pb-6 pt-14 shadow-sm">
       <Button
         as-child
         variant="outline"
@@ -53,14 +53,12 @@ const exercises = getExercisesByWorkoutId(workout.id);
         </Button>
       </TimerDrawer>
 
-      <!-- <Button
-        variant="outline"
+      <Button
+        variant="ghost"
         class="mt-2"
       >
-        <NuxtLink :to="`/workouts/${workout.id}`">
-          Editar treino
-        </NuxtLink>
-      </Button> -->
+        Concluir treino
+      </Button>
     </main>
   </div>
 </template>
