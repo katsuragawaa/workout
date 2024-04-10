@@ -86,8 +86,10 @@ const handleNewExercise = (id: string) => {
         @update:open="openExerciseForm = $event"
       />
 
-      <DeleteAlertDialog
+      <ConfirmDialog
         :open="openAlert"
+        title="Deletar treino"
+        description="Tem certeza que deseja deletar este treino?"
         @update:open="openAlert = $event"
         @confirm="confirmDelete"
       />

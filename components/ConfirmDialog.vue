@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 const props = defineProps<{
   open: boolean;
+  title: string;
+  description: string;
 }>();
 
 const emit = defineEmits(["update:open", "confirm"]);
@@ -13,15 +15,13 @@ const emit = defineEmits(["update:open", "confirm"]);
   >
     <AlertDialogContent>
       <AlertDialogHeader>
-        <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
-        <AlertDialogDescription>
-          Essa ação não pode ser desfeita. Todos os dados relacionados serão perdidos.
-        </AlertDialogDescription>
+        <AlertDialogTitle>{{ props.title }}</AlertDialogTitle>
+        <AlertDialogDescription>{{ props.description }}</AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancelar</AlertDialogCancel>
         <AlertDialogAction @click="emit('confirm')">
-          Continuar
+          Confirmar
         </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
