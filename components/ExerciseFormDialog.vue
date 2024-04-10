@@ -2,7 +2,6 @@
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import * as z from "zod";
-import { useToast } from "~/components/ui/toast";
 import { muscles } from "~/lib/muscles";
 import type { Exercise } from "~/types";
 
@@ -33,8 +32,6 @@ const formSchema = toTypedSchema(
   }),
 );
 
-const { toast } = useToast();
-
 const { saveExercise, updateExercise } = useExercises();
 
 const form = useForm({
@@ -43,19 +40,6 @@ const form = useForm({
 });
 
 const submit = form.handleSubmit((values) => {
-  toast({
-    title: "You submitted the following values:",
-    description: h(
-      "pre",
-      { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" },
-      h(
-        "code",
-        { class: "text-white" },
-        JSON.stringify({ ...values, id: props.exercise?.id || "idk", workoutId: props.workoutId }, null, 2),
-      ),
-    ),
-  });
-
   const id = props.exercise?.id;
   id ? updateExercise(id, values) : saveExercise({ ...values, workoutId: props.workoutId });
 
