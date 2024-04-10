@@ -2,8 +2,10 @@
 import { ArrowLeftIcon, Timer } from "lucide-vue-next";
 
 const route = useRoute();
-const { getWorkoutById } = useWorkouts();
-const { getExercisesByWorkoutId } = useExercises();
+const router = useRouter();
+
+const { getWorkoutById, updateWorkout } = useWorkouts();
+const { getExercisesByWorkoutId, updateExercise } = useExercises();
 
 const workoutId = route.params.id;
 const workout = getWorkoutById(workoutId as string);
@@ -12,6 +14,14 @@ if (!workout) {
 }
 
 const exercises = getExercisesByWorkoutId(workout.id);
+
+const finish = () => {
+  updateWorkout(workout.id, { finishedAt: new Date() });
+  exercises.forEach((exercise) => {
+    updateExercise(exercise.id, { done: false });
+  });
+  router.push("/");
+};
 </script>
 
 <template>
@@ -49,7 +59,10 @@ const exercises = getExercisesByWorkoutId(workout.id);
         />
       </div>
 
-      <Button class="mt-10">
+      <Button
+        class="mt-10"
+        @click="finish"
+      >
         Concluir treino
       </Button>
     </main>
