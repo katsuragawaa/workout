@@ -18,6 +18,7 @@ const toggleDone = () => {
   done.value = !done.value;
   updateExercise(props.exercise.id, { done: done.value });
 };
+
 </script>
 
 <template>
