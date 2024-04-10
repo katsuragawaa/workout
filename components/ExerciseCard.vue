@@ -8,12 +8,15 @@ const props = defineProps<{
   exercise: Exercise;
 }>();
 
-const done = ref(false);
+const done = ref(props.exercise.done);
 
-const muscle = muscles.find((m) => m.value === props.exercise.muscle)?.label || "inválido";
+const { updateExercise } = useExercises();
+
+const muscle = muscles.find((m) => m.value === props.exercise.muscle)?.label || "invalid";
 
 const toggleDone = () => {
   done.value = !done.value;
+  updateExercise(props.exercise.id, { done: done.value });
 };
 </script>
 
