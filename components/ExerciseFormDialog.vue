@@ -36,7 +36,10 @@ const { saveExercise, updateExercise } = useExercises();
 
 const form = useForm({
   validationSchema: formSchema,
-  initialValues: props.exercise || {},
+  initialValues: props.exercise || {
+    sets: 3,
+    reps: 10,
+  },
 });
 
 const submit = form.handleSubmit((values) => {
@@ -65,12 +68,8 @@ const toggleDialog = () => {
       >
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-medium">
-              Novo exercício
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Adicione atividades ao seu treino.
-            </p>
+            <h3 className="text-lg font-medium">Novo exercício</h3>
+            <p className="text-sm text-muted-foreground">Adicione atividades ao seu treino.</p>
           </div>
         </div>
 
@@ -139,9 +138,7 @@ const toggleDialog = () => {
         </div>
 
         <DialogFooter>
-          <Button type="submit">
-            Salvar
-          </Button>
+          <Button type="submit"> Salvar </Button>
         </DialogFooter>
       </form>
     </DialogContent>
