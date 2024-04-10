@@ -16,7 +16,9 @@ const exercises = getExercisesByWorkoutId(workout.id);
 
 <template>
   <div>
-    <header class="container sticky top-0 z-10 flex max-w-4xl items-center justify-between bg-background pb-6 pt-14 shadow-sm">
+    <header
+      class="container sticky top-0 z-10 flex max-w-4xl items-center justify-between bg-background pb-6 pt-14 shadow-sm"
+    >
       <Button
         as-child
         variant="outline"
@@ -47,16 +49,7 @@ const exercises = getExercisesByWorkoutId(workout.id);
         />
       </div>
 
-      <TimerDrawer>
-        <Button class="mt-10">
-          Descansar
-        </Button>
-      </TimerDrawer>
-
-      <Button
-        variant="ghost"
-        class="mt-2"
-      >
+      <Button class="mt-10">
         Concluir treino
       </Button>
     </main>
