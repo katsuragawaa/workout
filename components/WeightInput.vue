@@ -22,6 +22,11 @@ const onSubmit = handleSubmit((values) => {
     ),
   });
 
+  if (typeof values.weight !== "number") {
+    updateExercise(props.id, { weight: undefined });
+    return;
+  }
+
   updateExercise(props.id, { weight: values.weight });
 });
 </script>
