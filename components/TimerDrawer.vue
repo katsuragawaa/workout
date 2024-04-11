@@ -64,6 +64,10 @@ const resumeTimer = () => {
 
 onUnmounted(clearTimer);
 
+watch(time, (value) => {
+  if(value <= 0) { clearTimer() }
+})
+
 if(isSupported.value) {
   watch(isRunning, async(value) => {
     if(!value && time.value <= 0) {
