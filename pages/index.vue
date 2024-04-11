@@ -9,6 +9,12 @@ const getDescription = (id: string) => {
   const muscles = getMusclesByWorkoutId(id);
   return muscles.map((muscle) => m.find((m) => m.value === muscle)?.label).join(", ");
 };
+
+const nextWorkoutId = computed(() => {
+  const timestamps = workouts.map((workout) => workout.finishedAt.getTime());
+  const index = timestamps.indexOf(Math.max(...timestamps));
+  return workouts[(index + 1) % workouts.length].id;
+});
 </script>
 
 <template>
@@ -31,6 +37,7 @@ const getDescription = (id: string) => {
           v-for="workout in workouts"
           :id="workout.id"
           :key="workout.id"
+          :next="workout.id === nextWorkoutId"
           :name="workout.name"
           :description="getDescription(workout.id)"
         />

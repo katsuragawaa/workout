@@ -6,11 +6,12 @@ const props = defineProps<{
   id: string;
   name: string;
   description: string;
+  next: boolean;
 }>();
 </script>
 
 <template>
-  <Card>
+  <Card :class="{ 'border-foreground': next }">
     <CardHeader class="flex flex-row items-center justify-between gap-4">
       <div class="space-y-1.5">
         <CardTitle>{{ props.name }}</CardTitle>
@@ -19,7 +20,7 @@ const props = defineProps<{
 
       <Button
         as-child
-        variant="outline"
+        :variant="next ? 'default' : 'secondary'"
         size="icon"
         class="min-w-10"
       >
