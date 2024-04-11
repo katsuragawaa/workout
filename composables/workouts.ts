@@ -11,7 +11,7 @@ export const useWorkouts = () => {
   ]);
 
   const getWorkouts = () => {
-    return workouts.value;
+    return workouts.value.map((workout) => ({ ...workout, finishedAt: new Date(workout.finishedAt || 0) }));
   };
 
   const getWorkoutById = (id: string) => {
