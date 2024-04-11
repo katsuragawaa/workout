@@ -6,6 +6,7 @@ let timerId: ReturnType<typeof setInterval> | null = null;
 const {
   isSupported,
   show,
+  ensurePermissions,
 } = useWebNotification({
   title: 'O intervalo acabou, vambora!',
   dir: 'auto',
@@ -63,6 +64,9 @@ if(isSupported.value) {
     if(!value && time.value <= 0) {
       await show();
     }
+  })
+  watch(time, () => {
+    ensurePermissions();
   })
 }
 
