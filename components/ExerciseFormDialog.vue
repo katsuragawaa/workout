@@ -42,7 +42,7 @@ const form = useForm({
   initialValues: props.exercise || {},
 });
 
-const submit = form.handleSubmit((values) => {
+const submit = form.handleSubmit(async (values) => {
   toast({
     title: "You submitted the following values:",
     description: h(
@@ -57,7 +57,7 @@ const submit = form.handleSubmit((values) => {
   });
 
   const id = props.exercise?.id;
-  id ? updateExercise(id, values) : saveExercise({ ...values, workoutId: props.workoutId });
+  id ? await updateExercise(id, values) : await saveExercise({ ...values, workoutId: props.workoutId });
 
   emit("update:open", false);
 });

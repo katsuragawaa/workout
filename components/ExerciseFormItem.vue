@@ -27,8 +27,8 @@ const handleDelete = () => {
   openAlert.value = true;
 };
 
-const confirmDelete = () => {
-  deleteExercise(props.id);
+const confirmDelete = async () => {
+  await deleteExercise(props.id);
 };
 </script>
 

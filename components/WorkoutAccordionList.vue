@@ -5,10 +5,10 @@ const emit = defineEmits(["edit", "delete", "new-exercise"]);
 const selectedId = ref<string>("");
 
 const { getWorkouts } = useWorkouts();
-const { getExercisesByWorkoutId } = useExercises();
+const { getExercises } = useExercises();
 
 const workouts = await getWorkouts();
-const exercises = await getExercisesByWorkoutId(selectedId.value);
+const exercises = await getExercises();
 </script>
 
 <template>
@@ -58,7 +58,10 @@ const exercises = await getExercisesByWorkoutId(selectedId.value);
         </DropdownMenu>
       </div>
 
-      <AccordionContent class="grid grid-cols-1 gap-3 md:grid-cols-2">
+      <AccordionContent
+        v-if="exercises && exercises.length"
+        class="grid grid-cols-1 gap-3 md:grid-cols-2"
+      >
         <ExerciseFormItem
           v-for="exercise in exercises"
           :id="exercise.id"
