@@ -3,16 +3,7 @@ import { ulid } from "ulidx";
 import type { Exercise } from "~/types";
 
 export const useExercises = () => {
-  const exercises = useStorage<Exercise[]>("exercises", [
-    {
-      id: ulid(),
-      workoutId: "1",
-      name: "Exercise 1",
-      muscle: "chest",
-      sets: 3,
-      reps: 10,
-    },
-  ]);
+  const exercises = useStorage<Exercise[]>("exercises", []);
 
   const getExercises = () => {
     return exercises.value;

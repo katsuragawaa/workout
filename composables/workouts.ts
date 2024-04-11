@@ -3,12 +3,7 @@ import { ulid } from "ulidx";
 import type { Workout } from "~/types";
 
 export const useWorkouts = () => {
-  const workouts = useStorage<Workout[]>("workouts", [
-    {
-      id: "1",
-      name: "Workout 1",
-    },
-  ]);
+  const workouts = useStorage<Workout[]>("workouts", []);
 
   const getWorkouts = () => {
     return workouts.value.map((workout) => ({ ...workout, finishedAt: new Date(workout.finishedAt || 0) }));
