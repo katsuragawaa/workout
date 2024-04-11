@@ -12,7 +12,13 @@ const getDescription = (id: string) => {
 
 const nextWorkoutId = computed(() => {
   const timestamps = workouts.map((workout) => workout.finishedAt.getTime());
-  const index = timestamps.indexOf(Math.max(...timestamps));
+
+  const max = Math.max(...timestamps);
+  if (max === 0) {
+    return workouts[0].id;
+  }
+
+  const index = timestamps.indexOf(max);
   return workouts[(index + 1) % workouts.length].id;
 });
 </script>
