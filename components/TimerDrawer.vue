@@ -105,7 +105,12 @@ if(isSupported.value) {
             Retomar
           </Button>
           <DrawerClose as-child>
-            <Button variant="outline"> Fechar </Button>
+            <Button
+              variant="outline"
+              @click.prevent="clearTimer"
+            >
+              Fechar
+            </Button>
           </DrawerClose>
         </DrawerFooter>
       </div>
