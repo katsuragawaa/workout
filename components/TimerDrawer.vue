@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { TimerResetIcon } from "lucide-vue-next";
 import { useWebNotification } from '@vueuse/core';
 
 const initialTime = 90;
@@ -30,6 +31,8 @@ const clearTimer = () => {
   if (timerId) {
     clearInterval(timerId);
     timerId = null;
+    time.value = initialTime;
+    isRunning.value = false;
   }
 };
 
@@ -53,7 +56,10 @@ const resumeTimer = () => {
       time.value = time.value > 0 ? time.value - 1 : 0;
     }, 1000);
     isRunning.value = true;
-  }
+  } 
+  if(!timerId && time.value <= 0) {
+    startTimer()
+  } 
 };
 
 onUnmounted(clearTimer);
@@ -75,7 +81,7 @@ if(isSupported.value) {
   <Drawer>
     <DrawerTrigger
       as-child
-      @click="startTimer"
+      @click="resumeTimer"
     >
       <slot />
     </DrawerTrigger>
@@ -91,22 +97,33 @@ if(isSupported.value) {
         </div>
 
         <DrawerFooter>
-          <Button
-            v-if="isRunning"
-            @click="pauseTimer"
-          >
-            Pausar
-          </Button>
-          <Button
-            v-else
-            @click="resumeTimer"
-          >
-            Retomar
-          </Button>
+          <div class="flex space-x-2">
+            <Button
+              v-if="isRunning"
+              class="flex-auto"
+              @click="pauseTimer"
+            >
+              Pausar
+            </Button>
+            <Button
+              v-else
+              class="flex-auto"
+              @click="resumeTimer"
+            >
+              Retomar
+            </Button>
+            <Button
+              class="ml-4 mr-0"
+              size="icon"
+              @click.prevent="clearTimer"
+            >
+              <TimerResetIcon />
+            </Button>
+          </div>
+          
           <DrawerClose as-child>
             <Button
               variant="outline"
-              @click.prevent="clearTimer"
             >
               Fechar
             </Button>
