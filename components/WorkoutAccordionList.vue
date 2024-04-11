@@ -7,7 +7,7 @@ const selectedId = ref<string>("");
 const { getWorkouts } = useWorkouts();
 const { getExercises } = useExercises();
 
-const workouts = await getWorkouts();
+const {value: workouts} = await getWorkouts();
 const exercises = await getExercises();
 </script>
 
