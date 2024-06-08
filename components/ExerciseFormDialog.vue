@@ -68,8 +68,12 @@ const toggleDialog = () => {
       >
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-medium">Novo exercício</h3>
-            <p className="text-sm text-muted-foreground">Adicione atividades ao seu treino.</p>
+            <h3 className="text-lg font-medium">
+              Novo exercício
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Adicione atividades ao seu treino.
+            </p>
           </div>
         </div>
 
@@ -82,7 +86,7 @@ const toggleDialog = () => {
             <FormControl>
               <Input
                 type="text"
-                placeholder="Supino ereto"
+                placeholder="Supino reto"
                 v-bind="componentField"
               />
             </FormControl>
@@ -138,7 +142,9 @@ const toggleDialog = () => {
         </div>
 
         <DialogFooter>
-          <Button type="submit"> Salvar </Button>
+          <Button type="submit">
+            Salvar
+          </Button>
         </DialogFooter>
       </form>
     </DialogContent>

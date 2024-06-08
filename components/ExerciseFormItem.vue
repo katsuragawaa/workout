@@ -56,34 +56,36 @@ const confirmDelete = () => {
         </div>
       </div>
 
-      <DropdownMenu>
-        <DropdownMenuTrigger as-child>
-          <Button
-            variant="ghost"
-            size="icon"
-            class="min-w-10"
-          >
-            <MoreVertical class="h-4 w-4" />
-            <span class="sr-only">More</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem
-            class="flex items-center gap-2"
-            @click="handleEdit"
-          >
-            <Pencil class="h-3 w-3" />
-            Editar
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            class="flex items-center gap-2"
-            @click="handleDelete"
-          >
-            <Trash2 class="h-3 w-3" />
-            Deletar
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div class="flex flex-1 justify-end">
+        <DropdownMenu>
+          <DropdownMenuTrigger as-child>
+            <Button
+              variant="ghost"
+              size="icon"
+              class="min-w-10"
+            >
+              <MoreVertical class="h-4 w-4" />
+              <span class="sr-only">More</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem
+              class="flex items-center gap-2"
+              @click="handleEdit"
+            >
+              <Pencil class="h-3 w-3" />
+              Editar
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              class="flex items-center gap-2"
+              @click="handleDelete"
+            >
+              <Trash2 class="h-3 w-3" />
+              Deletar
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
 
       <ExerciseFormDialog
         :open="openForm"
