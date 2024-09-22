@@ -28,11 +28,11 @@ export const useExercises = () => {
     return Array.from(muscles);
   };
 
-  const saveExercise = (exercise: Omit<Exercise, "id">) => {
+  const saveExercise = async (exercise: Omit<Exercise, "id">) => {
     exercises.value.push({ ...exercise, id: ulid() });
   };
 
-  const updateExercise = (id: string, exercise: Partial<Exercise>) => {
+  const updateExercise = async (id: string, exercise: Partial<Exercise>) => {
     const index = exercises.value.findIndex((exercise) => exercise.id === id);
     if (index === -1) {
       return;
