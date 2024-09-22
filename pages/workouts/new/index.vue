@@ -81,7 +81,7 @@ const handleNewExercise = (id: string) => {
       />
 
       <ExerciseFormDialog
-        :open="openExerciseForm"
+        v-if="openExerciseForm"
         :workout-id="selectedId"
         @update:open="openExerciseForm = $event"
       />

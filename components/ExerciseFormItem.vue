@@ -88,7 +88,7 @@ const confirmDelete = () => {
       </div>
 
       <ExerciseFormDialog
-        :open="openForm"
+        v-if="openForm"
         :exercise="props"
         :workout-id="workoutId"
         @update:open="openForm = $event"

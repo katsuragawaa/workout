@@ -6,10 +6,15 @@ import { muscles } from "~/lib/muscles";
 import type { Exercise } from "~/types";
 
 const props = defineProps<{
-  open: boolean;
   exercise?: Exercise;
   workoutId: string;
 }>();
+
+onMounted(() => {
+  if (props.exercise) {
+    form.setValues(props.exercise);
+  }
+});
 
 const emit = defineEmits(["update:open"]);
 
@@ -35,30 +40,26 @@ const formSchema = toTypedSchema(
 const { saveExercise, updateExercise } = useExercises();
 
 const form = useForm({
+  keepValuesOnUnmount: false,
   validationSchema: formSchema,
-  initialValues: props.exercise || {
-    sets: 3,
-    reps: 10,
-  },
+  initialValues: { sets: 3, reps: 10 },
 });
 
-const submit = form.handleSubmit((values) => {
+const submit = form.handleSubmit(async (values) => {
   const id = props.exercise?.id;
-  id ? updateExercise(id, values) : saveExercise({ ...values, workoutId: props.workoutId });
+  id ? await updateExercise(id, values) : await saveExercise({ ...values, workoutId: props.workoutId });
 
   emit("update:open", false);
 });
 
 const toggleDialog = () => {
-  console.log("props.exercise", props.exercise);
-  form.resetForm();
   emit("update:open", false);
 };
 </script>
 
 <template>
   <Dialog
-    :open="open"
+    :open="true"
     @update:open="toggleDialog"
   >
     <DialogContent class="sm:max-w-[425px]">
