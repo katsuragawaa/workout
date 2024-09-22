@@ -67,6 +67,7 @@ const handleCopy = () => {
                 placeholder="Cole o JSON para importar os treinos."
                 v-bind="componentField"
                 class="h-96 font-mono"
+                @focus="$event.target.select()"
               />
             </FormControl>
             <FormDescription>
