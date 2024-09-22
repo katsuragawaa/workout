@@ -10,7 +10,7 @@ const emit = defineEmits(["update:open"]);
 const { getWorkouts, overwriteWorkouts } = useWorkouts();
 const { getExercises, overwriteExercises } = useExercises();
 
-const workouts = JSON.stringify({ workouts: getWorkouts(), exercises: getExercises() }, null, 2);
+const code = JSON.stringify({ workouts: getWorkouts(), exercises: getExercises() }, null, 2);
 
 const formSchema = toTypedSchema(
   z.object({
@@ -19,22 +19,22 @@ const formSchema = toTypedSchema(
 );
 
 const { handleSubmit } = useForm({
-  initialValues: { code: workouts },
+  initialValues: { code: code },
   validationSchema: formSchema,
   keepValuesOnUnmount: false,
 });
 
 const onSubmit = handleSubmit(async (values) => {
-  const newWorkouts = JSON.parse(values.code || "{}");
+  const newCode = JSON.parse(values.code || "{}");
 
-  await overwriteWorkouts(newWorkouts.workouts);
-  await overwriteExercises(newWorkouts.exercises);
+  await overwriteWorkouts(newCode.workouts);
+  await overwriteExercises(newCode.exercises);
 
   emit("update:open", false);
 });
 
 const handleCopy = () => {
-  navigator.clipboard.writeText(workouts);
+  navigator.clipboard.writeText(code);
   toast({
     title: "Treinos copiados!",
     description: "Os treinos foram copiados para a área de transferência.",
