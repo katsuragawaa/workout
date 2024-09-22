@@ -35,11 +35,16 @@ export const useWorkouts = () => {
     workouts.value.splice(index, 1);
   };
 
+  const overwriteWorkouts = async (newWorkouts: Workout[]) => {
+    workouts.value = newWorkouts;
+  };
+
   return {
     getWorkouts,
     getWorkoutById,
     saveWorkout,
     updateWorkout,
     deleteWorkout,
+    overwriteWorkouts,
   };
 };
