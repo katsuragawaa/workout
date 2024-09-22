@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { ArrowLeftIcon } from "lucide-vue-next";
+import { ArrowLeftIcon, CodeXmlIcon } from "lucide-vue-next";
 import type { Workout } from "~/types";
 
 const openWorkoutForm = ref(false);
 const openExerciseForm = ref(false);
+const openImportExport = ref(false);
 const openAlert = ref(false);
 const selectedId = ref("");
 const workout = ref<Workout>();
@@ -22,6 +23,10 @@ const handleNew = () => {
 const handleEdit = (w: Workout) => {
   openWorkoutForm.value = true;
   workout.value = w;
+};
+
+const handleImportExport = () => {
+  openImportExport.value = true;
 };
 
 const handleDelete = (id: string) => {
@@ -48,8 +53,16 @@ const handleNewExercise = (id: string) => {
         size="icon"
       >
         <NuxtLink to="/">
-          <ArrowLeftIcon class="h-4 w-4" />
+          <ArrowLeftIcon class="size-4" />
         </NuxtLink>
+      </Button>
+
+      <Button
+        size="icon"
+        variant="secondary"
+        @click="handleImportExport"
+      >
+        <CodeXmlIcon class="size-4" />
       </Button>
     </header>
 
@@ -84,6 +97,11 @@ const handleNewExercise = (id: string) => {
         v-if="openExerciseForm"
         :workout-id="selectedId"
         @update:open="openExerciseForm = $event"
+      />
+
+      <WorkoutImportExportDialog
+        v-if="openImportExport"
+        @update:open="openImportExport = $event"
       />
 
       <ConfirmDialog
