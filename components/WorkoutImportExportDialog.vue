@@ -7,9 +7,10 @@ import { useForm } from "vee-validate";
 
 const emit = defineEmits(["update:open"]);
 
-const { getWorkouts } = useWorkouts();
+const { getWorkouts, overwriteWorkouts } = useWorkouts();
+const { getExercises, overwriteExercises } = useExercises();
 
-const workouts = JSON.stringify(getWorkouts(), null, 2);
+const workouts = JSON.stringify({ workouts: getWorkouts(), exercises: getExercises() }, null, 2);
 
 const formSchema = toTypedSchema(
   z.object({
@@ -23,8 +24,12 @@ const { handleSubmit } = useForm({
   keepValuesOnUnmount: false,
 });
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values);
+const onSubmit = handleSubmit(async (values) => {
+  const newWorkouts = JSON.parse(values.code || "{}");
+
+  await overwriteWorkouts(newWorkouts.workouts);
+  await overwriteExercises(newWorkouts.exercises);
+
   emit("update:open", false);
 });
 
@@ -64,7 +69,9 @@ const handleCopy = () => {
                 class="h-96 font-mono"
               />
             </FormControl>
-            <FormDescription>Cole o JSON para importar os treinos.</FormDescription>
+            <FormDescription>
+              Cole o JSON para importar os treinos. Isso irá sobrescrever todos os treinos existentes.
+            </FormDescription>
             <FormMessage />
           </FormItem>
         </FormField>

@@ -10,6 +10,7 @@ const selectedId = ref("");
 const workout = ref<Workout>();
 
 const { deleteWorkout } = useWorkouts();
+const { deleteExercisesByWorkoutId } = useExercises();
 
 const openUpdate = (open: boolean) => {
   openWorkoutForm.value = open;
@@ -36,6 +37,7 @@ const handleDelete = (id: string) => {
 
 const confirmDelete = () => {
   deleteWorkout(selectedId.value);
+  deleteExercisesByWorkoutId(selectedId.value);
 };
 
 const handleNewExercise = (id: string) => {
