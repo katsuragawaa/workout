@@ -94,8 +94,10 @@ const confirmDelete = () => {
         @update:open="openForm = $event"
       />
 
-      <DeleteAlertDialog
+      <ConfirmDialog
         :open="openAlert"
+        title="Deletar exercício"
+        description="Tem certeza que deseja deletar esse exercício?"
         @update:open="openAlert = $event"
         @confirm="confirmDelete"
       />
