@@ -4,37 +4,69 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { toast } from "./ui/toast";
 import { z } from "zod";
 import { useForm } from "vee-validate";
+import type { Exercise, Workout } from "~/types";
 
 const emit = defineEmits(["update:open"]);
 
 const { getWorkouts, overwriteWorkouts } = useWorkouts();
 const { getExercises, overwriteExercises } = useExercises();
 
-const code = JSON.stringify({ workouts: getWorkouts(), exercises: getExercises() }, null, 2);
+const workouts: Workout[] = getWorkouts().map((workout) => ({ id: workout.id, name: workout.name }));
+const exercises: Exercise[] = getExercises().map((exercise) => ({
+  id: exercise.id,
+  workoutId: exercise.workoutId,
+  name: exercise.name,
+  muscle: exercise.muscle,
+  sets: exercise.sets,
+  reps: exercise.reps,
+  weight: exercise.weight,
+}));
 
-const formSchema = toTypedSchema(
-  z.object({
-    code: z.string(),
-  }),
-);
+const json = JSON.stringify({ workouts, exercises }, null, 2);
+const jsonSchema = z.object({
+  workouts: z.array(z.object({ id: z.string(), name: z.string() })),
+  exercises: z.array(
+    z.object({
+      id: z.string(),
+      workoutId: z.string(),
+      name: z.string(),
+      muscle: z.string(),
+      sets: z.number(),
+      reps: z.number(),
+      weight: z.number().optional(),
+    }),
+  ),
+});
 
+const formSchema = toTypedSchema(z.object({ json: z.string() }));
 const { handleSubmit } = useForm({
-  initialValues: { code: code },
+  initialValues: { json: json },
   validationSchema: formSchema,
   keepValuesOnUnmount: false,
 });
 
 const onSubmit = handleSubmit(async (values) => {
-  const newCode = JSON.parse(values.code || "{}");
+  let updated: { workouts: Workout[]; exercises: Exercise[] } = { workouts: [], exercises: [] };
+  try {
+    updated = jsonSchema.parse(JSON.parse(values.json));
+  } catch (error) {
+    console.error(error);
+    toast({
+      title: "Erro ao importar treinos",
+      description: "O JSON fornecido é inválido.",
+      variant: "destructive",
+    });
+    return;
+  }
 
-  await overwriteWorkouts(newCode.workouts);
-  await overwriteExercises(newCode.exercises);
+  await overwriteWorkouts(updated.workouts);
+  await overwriteExercises(updated.exercises);
 
   emit("update:open", false);
 });
 
 const handleCopy = () => {
-  navigator.clipboard.writeText(code);
+  navigator.clipboard.writeText(json);
   toast({
     title: "Treinos copiados!",
     description: "Os treinos foram copiados para a área de transferência.",
@@ -59,7 +91,7 @@ const handleCopy = () => {
       >
         <FormField
           v-slot="{ componentField }"
-          name="code"
+          name="json"
         >
           <FormItem>
             <FormControl>
