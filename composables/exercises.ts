@@ -50,6 +50,14 @@ export const useExercises = () => {
     exercises.value.splice(index, 1);
   };
 
+  const deleteExercisesByWorkoutId = (workoutId: string) => {
+    exercises.value = exercises.value.filter((exercise) => exercise.workoutId !== workoutId);
+  };
+
+  const overwriteExercises = async (newExercises: Exercise[]) => {
+    exercises.value = newExercises;
+  };
+
   return {
     getExercises,
     getExerciseById,
@@ -58,5 +66,7 @@ export const useExercises = () => {
     saveExercise,
     updateExercise,
     deleteExercise,
+    deleteExercisesByWorkoutId,
+    overwriteExercises,
   };
 };
